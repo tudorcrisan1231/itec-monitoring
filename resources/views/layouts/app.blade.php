@@ -6,9 +6,11 @@
 
     <title>ITEC Monitoring</title>
     @vite('resources/css/app.css')
+    @livewireStyles
 </head>
 <body>
-@include('components.session')
+    @include('components.session')
     @yield('content')
+    @livewireScripts
 </body>
 </html>
