@@ -23,7 +23,7 @@ class AuthController extends Controller
 
         //check is user is active in db
         $user = User::where('email', $request->email)->first();
-        if($user->status == 0){
+        if($user->status != 'approved'){
             return redirect("login")->withError('Your account is not active yet, please wait for admin approval');
         }
 
