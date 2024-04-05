@@ -25,5 +25,6 @@ Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 
 //auth routes
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('add-application', [DashboardController::class, 'addApplication'])->name('addApplication');
 });

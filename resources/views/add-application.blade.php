@@ -1,7 +1,5 @@
 @extends('layouts.dashboard')
 
 @section('dashboard_content')
-
-    @livewire('dashboard')
-
+    @livewire('add-application')
 @endsection
