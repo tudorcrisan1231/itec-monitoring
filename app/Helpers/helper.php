@@ -112,18 +112,14 @@ function ccMails(){
 
 function secondsToCronExpression($seconds = 3600)
 {
-    if($seconds == null){
+    if($seconds == null || $seconds < 60){
         $seconds = 3600;
     }
 
-    if($seconds < 60){
-        $cron = new CronExpression("*/".$seconds." * * * * *");
-    } else {
-        $minutes = floor($seconds / 60);
+    $minutes = floor($seconds / 60);
 
-        // Create a CronExpression instance
-        $cron = new CronExpression('*/' . $minutes . ' * * * *');
-    }
+    // Create a CronExpression instance
+    $cron = new CronExpression('*/' . $minutes . ' * * * *');
 
     // Get the cron expression
     return $cron->getExpression();
