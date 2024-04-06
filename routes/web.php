@@ -29,4 +29,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('add-application', [DashboardController::class, 'addApplication'])->name('addApplication');
     Route::get('application/{name}', [DashboardController::class, 'application'])->name('application');
     Route::get('/logs', [DashboardController::class, 'logs'])->name('logs');
+    Route::get('/tickets', [DashboardController::class, 'tickets'])->name('tickets');
 });

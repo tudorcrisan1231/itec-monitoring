@@ -60,6 +60,6 @@ class AuthController extends Controller
     {
         Session::flush();
         Auth::logout();
-        return redirect('login')->withSuccess('You are signed out!');
+        return redirect()->route('home')->withSuccess('You are signed out!');
     }
 }

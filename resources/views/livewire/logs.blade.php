@@ -58,7 +58,7 @@
             </div>
 
             <div class="px-4 lg:py-4 sm:px-6 lg:col-span-2">
-                <a href="{{route('application', ['name' => $log->application->name])}}" class="text-sm font-bold text-gray-900">
+                <a href="{{$log->application ? route('application', ['name' => $log->application->name]) : '#'}}" class="text-sm font-bold text-gray-900">
                     {{$log->application ? $log->application->name : ''}}
                 </a>
                 <div class="mt-1 text-sm font-medium text-gray-500" title="{{$log->endpoint->url ?? ''}}">

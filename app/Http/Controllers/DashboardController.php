@@ -26,4 +26,9 @@ class DashboardController extends Controller
     {
         return view('logs');
     }
+
+    public function tickets()
+    {
+        return view('tickets');
+    }
 }

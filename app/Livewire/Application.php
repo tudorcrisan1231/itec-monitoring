@@ -16,6 +16,7 @@ class Application extends Component
     public function deleteApplication(){
         $this->application->delete();
         UserApplication::where('application_id', $this->application->id)->delete();
+        Log::where('application_id', $this->application->id)->delete();
         return redirect()->route('dashboard')->with('success', 'Application deleted successfully');
     }
     public function mount(){
