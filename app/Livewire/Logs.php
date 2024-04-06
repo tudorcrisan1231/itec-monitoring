@@ -4,6 +4,7 @@ namespace App\Livewire;
 use App\Models\Log;
 use App\Models\Application;
 use Livewire\WithPagination;
+use App\Events\LogUpdated;
 
 use Livewire\Component;
 
@@ -11,11 +12,18 @@ class Logs extends Component
 {
     use WithPagination;
     public $applications,$selectedMethod, $selectedApplication;
+    protected $listeners = ['handleLogUpdatedEvent'];
 
     public function filterLogs()
     {
         $this->render();
         $this->resetPage();
+    }
+
+    public function handleLogUpdatedEvent($logData)
+    {
+        $this->applications = Application::all();
+        $this->dispatchBrowserEvent('succes', ['message' => 'Log Updated']);
     }
 
     public function mount()

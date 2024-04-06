@@ -9,6 +9,7 @@ use Cron\CronExpression;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AlertDeveloper;
+use App\Events\LogUpdated;
 
 function callEndpoints($app_id)
 {
@@ -47,6 +48,8 @@ function callEndpoints($app_id)
         $log->ip = request()->ip();
         $log->user_agent = request()->header('User-Agent');
         $log->save();
+
+        event(new LogUpdated($log));
     }
     return $results;
 }
