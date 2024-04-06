@@ -47,6 +47,44 @@ function callEndpoints($app_id)
     return $results;
 }
 
+function checkApplicationStatus($app_id, $lastCount = 10)
+{
+    $app = Application::find($app_id);
+
+    $logs = $app->logs->take($lastCount);
+    $tickets = $app->reports;
+
+
+    $status = 'stable';
+//    dd($tickets, $logs);
+
+    $unstable_logs = 0;
+    foreach($logs as $log){
+        if((integer)$log->status != 200 && (integer)$log->status != 302){
+            $unstable_logs++;
+        }
+    }
+
+    if($unstable_logs >= 1){
+        $status = 'unstable';
+    }
+
+    foreach ($tickets as $ticket){
+        if($ticket->status == 'pending'){
+            $status = 'unstable';
+        }
+    }
+//    dd($unstable_logs, $logs);
+    if($unstable_logs == $logs->count()){
+        $status = 'down';
+    }
+
+    $app->status = $status;
+    $app->save();
+
+    return $status;
+}
+
 function statusCodeColor($status_code){
     //return color based on status code as hex
     if($status_code >= 200 && $status_code <= 302){

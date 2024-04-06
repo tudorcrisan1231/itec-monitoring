@@ -34,6 +34,10 @@ class Dashboard extends Component
     }
     public function render()
     {
+        foreach ($this->applications as $application){
+            checkApplicationStatus($application->id);
+        }
+        $this->applications = Application::all();
         return view('livewire.dashboard');
     }
 }

@@ -54,4 +54,8 @@ class Application extends Model
     {
         return $this->belongsToMany(User::class, 'user_applications');
     }
+
+    public function reports(){
+        return $this->hasMany(Report::class);
+    }
 }

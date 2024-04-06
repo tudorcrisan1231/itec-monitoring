@@ -5,6 +5,9 @@
 
         </h1>
         <div class="flex items-center gap-4">
+            <input type="datetime-local" id="start_date" wire:change="filterCalls" wire:model="startDate" class="border block px-4 py-3 placeholder-gray-500 border-gray-300 rounded-lg focus:ring-lime-600 focus:border-lime-600 sm:text-sm caret-lime-600">
+            <input type="datetime-local" id="end_date" wire:change="filterCalls" wire:model="endDate" class="border block px-4 py-3 placeholder-gray-500 border-gray-300 rounded-lg focus:ring-lime-600 focus:border-lime-600 sm:text-sm caret-lime-600">
+
             <a href="{{ route('addApplication') }}?edit={{ $application->id }}}}"
                class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-lime-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-600 hover:bg-lime-500"
             >
@@ -21,7 +24,7 @@
     </div>
     <div class="grid grid-cols-1 gap-4 text-center sm:gap-6 sm:grid-cols-2 xl:grid-cols-3 w-full">
         @forelse($application->endpoints as $endpoint)
-            <div class="">
+            <div class="" id="chart_{{$endpoint->id}}">
                 <div class="overflow-hidden bg-white border border-gray-200 rounded-xl">
                     <div class="px-4 py-5 sm:p-3">
                         <div class="">
@@ -34,7 +37,7 @@
                         </div>
 
                         <livewire:livewire-pie-chart
-                            key="{{ $pieChartModel[$endpoint->id]->reactiveKey() }}"
+                            key="{{ $endpoint->id }}"
                             :pie-chart-model="$pieChartModel[$endpoint->id]"
                         />
                     </div>
