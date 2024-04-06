@@ -10,12 +10,16 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class LogUpdated
+class LogUpdated implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, SerializesModels;
+
+    public $logData;
 
     /**
      * Create a new event instance.
+     *
+     *
      */
     public function __construct($logData)
     {
@@ -25,12 +29,10 @@ class LogUpdated
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return PrivateChannel
      */
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
-        return [
-            new PrivateChannel('log-updated'),
-        ];
+        return new PrivateChannel('log-updated');
     }
 }

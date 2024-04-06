@@ -13,18 +13,12 @@ class Logs extends Component
 {
     use WithPagination;
     public $applications,$selectedMethod, $selectedApplication;
-
+    protected $listeners = ['logUpdated' => 'render'];
 
     public function filterLogs()
     {
         $this->render();
         $this->resetPage();
-    }
-
-    #[On('echo:orders,LogUpdated')]
-    public function logsUpdated()
-    {
-        $this->render();
     }
 
     public function mount()
