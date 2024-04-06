@@ -1,10 +1,13 @@
 <?php
+
 use App\Models\User;
 use App\Models\Application;
 use App\Models\Endpoint;
 use App\Models\UserApplication;
 use App\Models\Log;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AlertDeveloper;
 
 function callEndpoints($app_id)
 {
@@ -77,6 +80,8 @@ function checkApplicationStatus($app_id, $lastCount = 10)
 //    dd($unstable_logs, $logs);
     if($unstable_logs == $logs->count()){
         $status = 'down';
+
+        Mail::to($app->user ? $app->user->email : '')->cc(ccMails())->queue(new AlertDeveloper($app, "Application is down"));
     }
 
     $app->status = $status;
@@ -98,4 +103,8 @@ function statusCodeColor($status_code){
     }
 
     return '#f87171';
+}
+
+function ccMails(){
+    return ["crisantudor79@yahoo.com"];
 }

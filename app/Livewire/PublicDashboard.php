@@ -3,7 +3,9 @@
 namespace App\Livewire;
 use App\Models\Application;
 use App\Models\Report;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
+use App\Mail\AlertDeveloper;
 
 class PublicDashboard extends Component
 {
@@ -32,6 +34,8 @@ class PublicDashboard extends Component
             'application_id' => $this->selectedApplication->id,
             'description' => $this->issue
         ]);
+
+        Mail::to($this->selectedApplication->user ? $this->selectedApplication->user->email : '')->cc(ccMails())->queue(new AlertDeveloper($this->selectedApplication, "Someone reported an issue with your application. Please check the dashboard for more details. Message: $this->issue"));
 
         return redirect()->route('home')->with('success', 'Issue reported successfully');
     }
