@@ -86,6 +86,19 @@
                             </div>
 
                             <div class="sm:grid sm:grid-cols-3 sm:gap-5 sm:items-start">
+                                <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">
+                                    Monitoring interval
+                                    <span class="text-gray-300 text-xs">(in seconds > 60)</span>
+                                </label>
+                                <div class="mt-2 sm:mt-0 sm:col-span-2">
+                                    <input type="text" name="" id="seconds" wire:model="seconds" placeholder="60" class="border block w-full px-4 py-3 placeholder-gray-500 border-gray-300 rounded-lg focus:ring-lime-600 focus:border-lime-600 sm:text-sm caret-lime-600 min-w-96" />
+                                    @error('seconds')
+                                    <div class="sm:col-start-2 sm:col-span-2 mt-2 text-sm text-red-600">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="sm:grid sm:grid-cols-3 sm:gap-5 sm:items-start">
                                 <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2"> Endpoints
                                     <span class="text-gray-300 text-xs">
                                         (If you want to add a more complex endpoint, please use the curl option and write the command)

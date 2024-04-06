@@ -12,7 +12,7 @@ class AddApplication extends Component
 {
     use WithFileUploads;
 
-    public $logo, $name, $description, $url, $endpoints = [
+    public $logo, $name, $description, $url, $seconds, $endpoints = [
         ['method' => 'GET', 'url' => ''],
     ];
     public $isEdit = null, $tmpLogo = null, $tmpEndpoints = [];
@@ -31,6 +31,7 @@ class AddApplication extends Component
             'url' => 'required',
             'endpoints.*.method' => 'required',
             'endpoints.*.url' => 'required',
+            'seconds' => 'required|numeric|min:60',
         ]);
 
         if($this->isEdit){
@@ -45,6 +46,7 @@ class AddApplication extends Component
         $app->name = $this->name;
         $app->description = $this->description;
         $app->url = $this->isEdit ? $this->url : 'https://'.$this->url;
+        $app->cron_seconds = $this->seconds;
 
         if($this->logo){
             $this->validate([
