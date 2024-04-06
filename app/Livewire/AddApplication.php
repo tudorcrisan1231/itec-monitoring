@@ -101,6 +101,7 @@ class AddApplication extends Component
             $this->name = $app->name;
             $this->description = $app->description;
             $this->url = $app->url;
+            $this->seconds = $app->cron_seconds;
             $this->tmpLogo = $app->logo;
 
             $this->endpoints = [];
