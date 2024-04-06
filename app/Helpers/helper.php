@@ -115,6 +115,11 @@ function secondsToCronExpression($seconds = 3600)
     if($seconds == null){
         $seconds = 3600;
     }
+
+    if($seconds < 60){
+        $cron = new CronExpression("*/".$seconds." * * * * *");
+    }
+
     $minutes = floor($seconds / 60);
 
     // Create a CronExpression instance
