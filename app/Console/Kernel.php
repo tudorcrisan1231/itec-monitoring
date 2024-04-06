@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
+use App\Models\Application;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -12,7 +13,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $applications = Application::all();
+        foreach ($applications as $application) {
+            $schedule->call(function () use ($application) {
+                // Execute your function for each application
+                callEndpoints($application->id);
+            })->everyMinute(5); // Adjust the frequency according to your needs
+        }
     }
 
     /**

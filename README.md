@@ -25,7 +25,7 @@ Tier 3.
 ~~* Odată raportat, bug-ul trebuie sa apară într-o secțiune dedicată în Dashboardul Developerului si Aplicația trece pe Unstable daca este pe Stable. Daca Aplicația este pe Unstable sau Down, raportarea unui bug nu va schimba starea aplicației. Daca aplicația are raportat un bug, cat timp acesta nu este marcat ca rezolvat de către Developer, aplicația NU poate trece înapoi in Stable.~~
 
 Tier 4.
-* Când este raportat un bug, Developerul este notificat. Alegerea modalității de notificare este la alegerea echipei, si in funcție de complexitate se va primi punctaj diferit.
+* ~~Când este raportat un bug, Developerul este notificat. Alegerea modalității de notificare este la alegerea echipei, si in funcție de complexitate se va primi punctaj diferit.~~
 
 Tier 5.
 * Starea endpointurilor se va reîmprospăta in real-time pe Dashboardului.

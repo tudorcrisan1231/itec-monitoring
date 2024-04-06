@@ -41,7 +41,7 @@ class Application extends Component
             $this->endpointsStatus[$endpoint->id] = Log::where('application_id', $this->application->id)->where('endpoint_id', $endpoint->id)->get();
         }
 //        dd($this->endpointsStatus);
-        callEndpoints($this->application->id);
+//        callEndpoints($this->application->id);
         //if startDate exist in the query string, set the startDate to the query string value
         if(request()->query('startDate')){
             $this->startDate = request()->query('startDate');
