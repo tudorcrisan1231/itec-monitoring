@@ -179,7 +179,7 @@
                                 </div>
                             </div>
                             @if(auth()->user()->role_id == 2)
-                                <div class="overflow-hidden bg-white border border-gray-200 rounded-xl lg:col-span-3">
+                                <div class="overflow-hidden bg-white border border-gray-200 rounded-xl lg:col-span-3" id="users">
                                     <div class="px-4 py-5 sm:p-6">
                                         <div>
                                             <p class="text-base font-bold text-gray-900">New account requests</p>
