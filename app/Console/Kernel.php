@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
             $schedule->call(function () use ($application) {
                 // Execute your function for each application
                 callEndpoints($application->id);
-            })->everyMinute(5); // Adjust the frequency according to your needs
+            })->cron(secondsToCronExpression($application->cron_seconds));
         }
     }
 

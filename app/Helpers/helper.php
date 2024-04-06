@@ -5,6 +5,7 @@ use App\Models\Application;
 use App\Models\Endpoint;
 use App\Models\UserApplication;
 use App\Models\Log;
+use Cron\CronExpression;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AlertDeveloper;
@@ -107,4 +108,18 @@ function statusCodeColor($status_code){
 
 function ccMails(){
     return ["crisantudor79@yahoo.com"];
+}
+
+function secondsToCronExpression($seconds = 3600)
+{
+    if($seconds == null){
+        $seconds = 3600;
+    }
+    $minutes = floor($seconds / 60);
+
+    // Create a CronExpression instance
+    $cron = new CronExpression('*/' . $minutes . ' * * * *');
+
+    // Get the cron expression
+    return $cron->getExpression();
 }
