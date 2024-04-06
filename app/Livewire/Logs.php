@@ -22,7 +22,7 @@ class Logs extends Component
 
     public function handleLogUpdatedEvent($logData)
     {
-        $this->applications = Application::all();
+        $this->render();
         $this->dispatchBrowserEvent('succes', ['message' => 'Log Updated']);
     }
 
