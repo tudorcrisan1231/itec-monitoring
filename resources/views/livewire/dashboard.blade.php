@@ -114,12 +114,12 @@
                                 <div class="divide-y divide-gray-200">
                                     <div class="grid grid-cols-3 py-4 gap-y-4 lg:gap-0 lg:grid-cols-5">
                                         <div class="col-span-2 px-4 lg:py-4 sm:px-6 lg:col-span-1">
-                                                    <span class="text-xs font-medium text-green-900 bg-green-100 rounded-full inline-flex items-center px-2.5 py-1">
-                                                        <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
-                                                            <circle cx="4" cy="4" r="3"></circle>
-                                                        </svg>
-                                                        200
-                                                    </span>
+                                            <span class="text-xs font-medium text-green-900 bg-green-100 rounded-full inline-flex items-center px-2.5 py-1">
+                                                <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
+                                                    <circle cx="4" cy="4" r="3"></circle>
+                                                </svg>
+                                                200
+                                            </span>
                                         </div>
 
                                         <div class="px-4 lg:py-4 sm:px-6 lg:col-span-2">

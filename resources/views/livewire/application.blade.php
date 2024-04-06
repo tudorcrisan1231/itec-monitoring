@@ -28,9 +28,9 @@
                             <p class="text-sm font-semibold text-gray-500 uppercase">
                                 {{ $endpoint->method }}
                             </p>
-                            <p class="text-base font-bold text-gray-900">
+                            <div class="text-base font-bold text-gray-900 line-clamp-2">
                                 {{ $endpoint->url }}
-                            </p>
+                            </div>
                         </div>
 
                         <livewire:livewire-pie-chart

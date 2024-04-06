@@ -49,9 +49,9 @@ function callEndpoints($app_id)
 
 function statusCodeColor($status_code){
     //return color based on status code as hex
-    if($status_code >= 200 && $status_code < 300){
+    if($status_code >= 200 && $status_code <= 302){
         return '#10b981';
-    } elseif($status_code >= 300 && $status_code < 400){
+    } elseif($status_code > 302 && $status_code < 400){
         return '#f59e0b';
     } elseif($status_code >= 400 && $status_code < 500){
         return '#f87171';

@@ -6,6 +6,7 @@ use App\Models\Log;
 use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Asantibanez\LivewireCharts\Models\PieChartModel;
 use App\Models\Application as AppModel;
+use App\Models\UserApplication;
 use Livewire\Component;
 
 class Application extends Component
@@ -14,11 +15,15 @@ class Application extends Component
 
     public function deleteApplication(){
         $this->application->delete();
+        UserApplication::where('application_id', $this->application->id)->delete();
         return redirect()->route('dashboard')->with('success', 'Application deleted successfully');
     }
     public function mount(){
 
         $this->application = AppModel::where('name', $this->name)->first();
+        if(!$this->application){
+            return abort(404);
+        }
         //select distinct status from logs where application_id = $this->application->id
 //        $this->endpointsStatus = Log::select('status')->where('application_id', $this->application->id)->distinct()->get();
         foreach ($this->application->endpoints as $endpoint){
