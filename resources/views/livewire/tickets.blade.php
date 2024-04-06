@@ -41,7 +41,7 @@
     @empty
         <div class="p-6 text-center">
             <p class="text-lg text-gray-500">
-                No logs found.
+                No open tickets found.
             </p>
         </div>
     @endforelse

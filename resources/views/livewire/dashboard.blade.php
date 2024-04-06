@@ -69,18 +69,8 @@
                                 <div class="px-4 pt-5 sm:px-6">
                                     <div class="flex flex-wrap items-center justify-between">
                                         <p class="text-base font-bold text-gray-900 lg:order-1">
-                                            Applications Overview
+                                            Last 10 logs
                                         </p>
-
-                                        <nav class="flex items-center justify-center mt-4 space-x-1 2xl:order-2 lg:order-3 md:mt-0 lg:mt-4 sm:space-x-2 2xl:mt-0">
-                                            <a href="#" title="" class="px-2 py-2 text-xs font-bold text-gray-900 transition-all border border-gray-900 rounded-lg sm:px-4 hover:bg-gray-100 dration-200"> 12 Months </a>
-
-                                            <a href="#" title="" class="px-2 py-2 text-xs font-bold text-gray-500 transition-all border border-transparent rounded-lg sm:px-4 hover:bg-gray-100 dration-200"> 6 Months </a>
-
-                                            <a href="#" title="" class="px-2 py-2 text-xs font-bold text-gray-500 transition-all border border-transparent rounded-lg sm:px-4 hover:bg-gray-100 dration-200"> 30 Days </a>
-
-                                            <a href="#" title="" class="px-2 py-2 text-xs font-bold text-gray-500 transition-all border border-transparent rounded-lg sm:px-4 hover:bg-gray-100 dration-200"> 7 Days </a>
-                                        </nav>
                                     </div>
 
                                     <div id="chart4" class=""></div>
@@ -246,7 +236,29 @@
         </main>
     </div>
 
+    @php
+        $applicationData = [];
+        foreach($applications as $application) {
+            $applicationData[] = [
+                'name' => $application->name,
+                'data_logs' => $application->logs->take(10)->pluck('status')->toArray()
+            ];
+        }
+    @endphp
+
     <script>
+        var applicationData = @json($applicationData);
+
+        var series = applicationData.map(function(item) {
+            return {
+                name: item.name,
+                data: item.data_logs.map(function(status) {
+                    return parseInt(status);
+                })
+            };
+        });
+
+        console.log(applicationData)
         var chart4Options = {
             chart: {
                 type: 'area',
@@ -258,16 +270,7 @@
                     enabled: false,
                 },
             },
-            series: [
-                {
-                    name: 'New user',
-                    data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 76, 85, 101],
-                },
-                {
-                    name: 'Returning user',
-                    data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 44, 55, 57],
-                },
-            ],
+            series: series,
             dataLabels: {
                 enabled: false,
             },
@@ -284,10 +287,10 @@
                 },
             },
             xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                // show: false,
             },
             yaxis: {
-                show: false,
+                // show: false,
             },
             fill: {
                 type: 'solid',
