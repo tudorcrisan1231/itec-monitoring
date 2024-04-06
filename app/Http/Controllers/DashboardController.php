@@ -21,4 +21,9 @@ class DashboardController extends Controller
     {
         return view('application', compact('name'));
     }
+
+    public function logs()
+    {
+        return view('logs');
+    }
 }
