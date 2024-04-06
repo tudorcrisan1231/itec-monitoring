@@ -1,6 +1,4 @@
 <div>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
     <div class="flex flex-col flex-1 overflow-x-hidden">
         <main>
             <div class="py-6">
@@ -23,25 +21,25 @@
                                             <div class="absolute inset-x-0 top-0 transform -translate-y-1/2">
                                                 @if($application->status == 'stable')
                                                     <span class="text-xs font-medium text-green-900 bg-green-100 rounded-full inline-flex items-center px-2.5 py-1 uppercase">
-                                                        <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
-                                                            <circle cx="4" cy="4" r="3"></circle>
-                                                        </svg>
-                                                        {{$application->status}}
-                                                    </span>
+                                                    <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
+                                                        <circle cx="4" cy="4" r="3"></circle>
+                                                    </svg>
+                                                    {{$application->status}}
+                                                </span>
                                                 @elseif($application->status == 'unstable')
                                                     <span class="text-xs font-medium text-yellow-900 bg-yellow-100 rounded-full inline-flex items-center px-2.5 py-1 uppercase">
-                                                        <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-yellow-400" fill="currentColor" viewBox="0 0 8 8">
-                                                            <circle cx="4" cy="4" r="3"></circle>
-                                                        </svg>
-                                                        {{$application->status}}
-                                                    </span>
+                                                    <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-yellow-400" fill="currentColor" viewBox="0 0 8 8">
+                                                        <circle cx="4" cy="4" r="3"></circle>
+                                                    </svg>
+                                                    {{$application->status}}
+                                                </span>
                                                 @else
                                                     <span class="text-xs font-medium text-red-900 bg-red-100 rounded-full inline-flex items-center px-2.5 py-1 uppercase">
-                                                        <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-red-500" fill="currentColor" viewBox="0 0 8 8">
-                                                            <circle cx="4" cy="4" r="3"></circle>
-                                                        </svg>
-                                                        {{$application->status}}
-                                                    </span>
+                                                    <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-red-500" fill="currentColor" viewBox="0 0 8 8">
+                                                        <circle cx="4" cy="4" r="3"></circle>
+                                                    </svg>
+                                                    {{$application->status}}
+                                                </span>
                                                 @endif
                                             </div>
                                             @if($application->logo)
@@ -51,7 +49,7 @@
                                             @endif
                                         </div>
                                         <p class="mt-5 text-base font-bold text-gray-900">
-                                            <a href="#" title="">
+                                            <a href="{{route('application', ['name' => $application->name])}}" title="">
                                                 {{$application->name}}
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                             </a>
@@ -63,7 +61,6 @@
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
 
 
@@ -126,9 +123,9 @@
                                         </div>
 
                                         <div class="px-4 lg:py-4 sm:px-6 lg:col-span-2">
-                                            <p class="text-sm font-bold text-gray-900">
+                                            <a href="{{route('application', ['name' => $application->name])}}" class="text-sm font-bold text-gray-900">
                                                 Tazz.ro
-                                            </p>
+                                            </a>
                                             <p class="mt-1 text-sm font-medium text-gray-500">
                                                 GET: /api/v1/users
                                             </p>

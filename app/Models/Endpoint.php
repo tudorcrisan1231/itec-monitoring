@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Endpoint extends Model
 {
     use HasFactory;
-
+    protected $guarded = [];
     public function application(){
         return $this->belongsTo(Application::class);
     }
@@ -19,5 +19,9 @@ class Endpoint extends Model
 
     public function userApplications(){
         return $this->hasMany(UserApplication::class);
+    }
+
+    public function logs(){
+        return $this->hasMany(Log::class);
     }
 }

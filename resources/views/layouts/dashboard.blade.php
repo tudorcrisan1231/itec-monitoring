@@ -5,7 +5,7 @@
     <div class="flex flex-col">
         @include('components.dashboard_header')
 
-        <div class="flex flex-1">
+        <div class="grid" style="grid-template-columns: max-content 1fr;">
             <div class="hidden xl:flex xl:w-64 xl:flex-col">
                 @include('components.dashboard_sidebar')
             </div>

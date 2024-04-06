@@ -15,7 +15,7 @@ class AddApplication extends Component
     public $logo, $name, $description, $url, $endpoints = [
         ['method' => 'GET', 'url' => ''],
     ];
-    public $isEdit = null, $tmpLogo = null;
+    public $isEdit = null, $tmpLogo = null, $tmpEndpoints = [];
 
     public function addEndpoint(){
         $this->endpoints[] = ['method' => 'GET', 'url' => ''];
@@ -30,12 +30,15 @@ class AddApplication extends Component
             'name' => 'required',
             'url' => 'required',
             'endpoints.*.method' => 'required',
-            'endpoints.*.url' => 'required|url',
+            'endpoints.*.url' => 'required',
         ]);
 
         if($this->isEdit){
             $app = Application::find($this->isEdit);
         } else {
+            $this->validate([
+                'name' => 'unique:applications,name',
+            ]);
             $app = new Application();
         }
         $app->user_id = auth()->user()->id;
@@ -52,11 +55,12 @@ class AddApplication extends Component
 
         $app->save();
 
-        if($this->isEdit){
-            $app->endpoints()->delete();
-        }
-
         foreach($this->endpoints as $endpoint){
+            //verify if the endpoint is already in the database
+            if(Endpoint::where('url', $endpoint['url'])->where('application_id', $app->id)->first()){
+                continue;
+            }
+
             $ep = new Endpoint();
             $ep->user_id = auth()->user()->id;
             $ep->application_id = $app->id;
@@ -98,8 +102,10 @@ class AddApplication extends Component
             $this->tmpLogo = $app->logo;
 
             $this->endpoints = [];
+            $this->tmpEndpoints = [];
             foreach($app->endpoints as $endpoint){
                 $this->endpoints[] = ['method' => $endpoint->method, 'url' => $endpoint->url];
+                $this->tmpEndpoints[] = ['method' => $endpoint->method, 'url' => $endpoint->url];
             }
         }
     }
