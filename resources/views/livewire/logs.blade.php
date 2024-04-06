@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-4 mt-6 px-8 pb-10" wire:push="handleLogUpdatedEvent" >
+<div class="flex flex-col gap-4 mt-6 px-8 pb-10">
     <div class="flex items-center justify-between mb-10">
         <h1 class="text-2xl font-bold text-gray-900">
             LOGS

@@ -5,6 +5,7 @@ use App\Models\Log;
 use App\Models\Application;
 use Livewire\WithPagination;
 use App\Events\LogUpdated;
+use Livewire\Attributes\On;
 
 use Livewire\Component;
 
@@ -12,7 +13,7 @@ class Logs extends Component
 {
     use WithPagination;
     public $applications,$selectedMethod, $selectedApplication;
-    protected $listeners = ['handleLogUpdatedEvent'];
+
 
     public function filterLogs()
     {
@@ -20,10 +21,10 @@ class Logs extends Component
         $this->resetPage();
     }
 
-    public function handleLogUpdatedEvent($logData)
+    #[On('echo:orders,LogUpdated')]
+    public function logsUpdated()
     {
         $this->render();
-        $this->dispatchBrowserEvent('succes', ['message' => 'Log Updated']);
     }
 
     public function mount()

@@ -49,7 +49,7 @@ function callEndpoints($app_id)
         $log->user_agent = request()->header('User-Agent');
         $log->save();
 
-        event(new LogUpdated($log));
+        LogUpdated::dispatch();
     }
     return $results;
 }
