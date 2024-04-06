@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
             $schedule->call(function () use ($application) {
                 // Execute your function for each application
                 callEndpoints($application->id);
+                checkApplicationStatus($application->id, 100);
             })->cron(secondsToCronExpression($application->cron_seconds));
         }
     }

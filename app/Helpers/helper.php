@@ -51,11 +51,11 @@ function callEndpoints($app_id)
     return $results;
 }
 
-function checkApplicationStatus($app_id, $lastCount = 10)
+function checkApplicationStatus($app_id, $lastX = 10)
 {
     $app = Application::find($app_id);
 
-    $logs = $app->logs->take($lastCount);
+    $logs = $app->logs->take($lastX);
     $tickets = $app->reports;
 
 
