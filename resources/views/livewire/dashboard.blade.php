@@ -101,7 +101,7 @@
                                         </div>
 
                                         <div class="mt-4 sm:mt-0">
-                                            <a href="#" title="" class="inline-flex items-center text-xs font-semibold tracking-widest text-gray-500 uppercase hover:text-gray-900">
+                                            <a href="{{route('logs')}}" title="" class="inline-flex items-center text-xs font-semibold tracking-widest text-gray-500 uppercase hover:text-gray-900">
                                                 See all logs
                                                 <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
@@ -112,104 +112,70 @@
                                 </div>
 
                                 <div class="divide-y divide-gray-200">
-                                    <div class="grid grid-cols-3 py-4 gap-y-4 lg:gap-0 lg:grid-cols-5">
-                                        <div class="col-span-2 px-4 lg:py-4 sm:px-6 lg:col-span-1">
-                                            <span class="text-xs font-medium text-green-900 bg-green-100 rounded-full inline-flex items-center px-2.5 py-1">
-                                                <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
-                                                    <circle cx="4" cy="4" r="3"></circle>
-                                                </svg>
-                                                200
-                                            </span>
-                                        </div>
-
-                                        <div class="px-4 lg:py-4 sm:px-6 lg:col-span-2">
-                                            <a href="{{route('application', ['name' => $application->name])}}" class="text-sm font-bold text-gray-900">
-                                                Tazz.ro
-                                            </a>
-                                            <p class="mt-1 text-sm font-medium text-gray-500">
-                                                GET: /api/v1/users
-                                            </p>
-                                        </div>
-
-                                        <div class="px-4 lg:py-4 sm:px-6">
-                                            <p class="text-sm font-bold text-gray-900">
-                                                12:45:34 PM
-                                            </p>
-                                            <p class="mt-1 text-sm font-medium text-gray-500">Jan 17, 2022</p>
-                                        </div>
-
-                                        <div class="px-4 lg:py-4 sm:px-6">
-                                            <p class="mt-1 text-sm font-medium text-gray-500">
-                                                200 OK
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="grid grid-cols-3 py-4 gap-y-4 lg:gap-0 lg:grid-cols-5">
-                                        <div class="col-span-2 px-4 lg:py-4 sm:px-6 lg:col-span-1">
-                                                    <span class="text-xs font-medium text-yellow-900 bg-yellow-100 rounded-full inline-flex items-center px-2.5 py-1">
-                                                    <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-yellow-400" fill="currentColor" viewBox="0 0 8 8">
-                                                        <circle cx="4" cy="4" r="3"></circle>
-                                                    </svg>
-                                                    302
-                                                </span>
-                                        </div>
-
-                                        <div class="px-4 lg:py-4 sm:px-6 lg:col-span-2">
-                                            <p class="text-sm font-bold text-gray-900">
-                                                Tazz.ro
-                                            </p>
-                                            <p class="mt-1 text-sm font-medium text-gray-500">
-                                                GET: /api/v1/users
-                                            </p>
-                                        </div>
-
-                                        <div class="px-4 lg:py-4 sm:px-6">
-                                            <p class="text-sm font-bold text-gray-900">
-                                                12:45:34 PM
-                                            </p>
-                                            <p class="mt-1 text-sm font-medium text-gray-500">Jan 17, 2022</p>
-                                        </div>
-
-                                        <div class="px-4 lg:py-4 sm:px-6">
-                                            <p class="mt-1 text-sm font-medium text-gray-500">
-                                                200 OK
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="grid grid-cols-3 py-4 gap-y-4 lg:gap-0 lg:grid-cols-5">
-                                        <div class="col-span-2 px-4 lg:py-4 sm:px-6 lg:col-span-1">
-                                                    <span class="text-xs font-medium text-red-900 bg-red-100 rounded-full inline-flex items-center px-2.5 py-1">
+                                    @forelse($last10Logs as $log)
+                                        <div class="grid grid-cols-3 py-4 gap-y-4 lg:gap-0 lg:grid-cols-5">
+                                            <div class="col-span-2 px-4 lg:py-4 sm:px-6 lg:col-span-1">
+                                                @if($log->status >= 200 && $log->status < 300)
+                                                    <span class="text-xs font-medium text-green-900 bg-green-100 rounded-full inline-flex items-center px-2.5 py-1 uppercase">
+                                                        <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
+                                                            <circle cx="4" cy="4" r="3"></circle>
+                                                        </svg>
+                                                        {{$log->status}}
+                                                    </span>
+                                                                                @elseif($log->status >= 300 && $log->status < 400)
+                                                                                    <span class="text-xs font-medium text-yellow-900 bg-yellow-100 rounded-full inline-flex items-center px-2.5 py-1 uppercase">
+                                                        <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-yellow-400" fill="currentColor" viewBox="0 0 8 8">
+                                                            <circle cx="4" cy="4" r="3"></circle>
+                                                        </svg>
+                                                        {{$log->status}}
+                                                    </span>
+                                                                                @else
+                                                                                    <span class="text-xs font-medium text-red-900 bg-red-100 rounded-full inline-flex items-center px-2.5 py-1 uppercase">
                                                         <svg class="-ml-1 mr-1.5 h-2.5 w-2.5 text-red-500" fill="currentColor" viewBox="0 0 8 8">
                                                             <circle cx="4" cy="4" r="3"></circle>
                                                         </svg>
-                                                        500
+                                                        {{$log->status}}
                                                     </span>
-                                        </div>
+                                                @endif
+                                            </div>
 
-                                        <div class="px-4 lg:py-4 sm:px-6 lg:col-span-2">
-                                            <p class="text-sm font-bold text-gray-900">
-                                                Tazz.ro
-                                            </p>
-                                            <p class="mt-1 text-sm font-medium text-gray-500">
-                                                GET: /api/v1/users
-                                            </p>
-                                        </div>
+                                            <div class="px-4 lg:py-4 sm:px-6 lg:col-span-2">
+                                                <a href="{{route('application', ['name' => $log->application->name])}}" class="text-sm font-bold text-gray-900">
+                                                    {{$log->application ? $log->application->name : ''}}
+                                                </a>
+                                                <div class="mt-1 text-sm font-medium text-gray-500" title="{{$log->endpoint->url ?? ''}}">
+                                                    <b class="uppercase">
+                                                        {{$log->method}}:
+                                                    </b>
+                                                    <span class="line-clamp-2">
+                                                        {{$log->endpoint->url ?? ''}}
+                                                    </span>
+                                                </div>
+                                            </div>
 
-                                        <div class="px-4 lg:py-4 sm:px-6">
-                                            <p class="text-sm font-bold text-gray-900">
-                                                12:45:34 PM
-                                            </p>
-                                            <p class="mt-1 text-sm font-medium text-gray-500">Jan 17, 2022</p>
-                                        </div>
+                                            <div class="px-4 lg:py-4 sm:px-6">
+                                                <p class="text-sm font-bold text-gray-900">
+                                                    {{$log->created_at->diffForHumans()}}
+                                                </p>
+                                                <p class="mt-1 text-sm font-medium text-gray-500">
+                                                    {{$log->created_at->format('d M, Y: h:i A')}}
+                                                </p>
+                                            </div>
 
-                                        <div class="px-4 lg:py-4 sm:px-6">
-                                            <p class="mt-1 text-sm font-medium text-gray-500">
-                                                200 OK
+                                            <div class="px-4 lg:py-4 sm:px-6">
+                                                <p class="mt-1 text-sm font-medium text-gray-500">
+                                                    Correlation ID: {{$log->id}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <div class="p-6 text-center">
+                                            <p class="text-lg text-gray-500">
+                                                No logs found.
                                             </p>
                                         </div>
-                                    </div>
+                                    @endforelse
+
                                 </div>
                             </div>
                             @if(auth()->user()->role_id == 2)
