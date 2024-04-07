@@ -39,16 +39,28 @@ class PublicDashboard extends Component
         $this->selectedApplication->status = 'unstable';
         $this->selectedApplication->save();
 
-        //make a post curl request to: curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, env('SLACK_ALERT_WEBHOOK'));
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['text' => "Someone reported an issue with your application. Please check the dashboard for more details. Message: $this->issue"]));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+        //curl request to: curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://hooks.slack.com/services/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',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => '{"text":"Someone reported an issue with your application. Please check the dashboard for more details. Message: '.$this->issue.'"}',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        curl_close($curl);
 
         //dd response and status
         dd($response, $status);
