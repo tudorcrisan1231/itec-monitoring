@@ -14,7 +14,7 @@ class Logs extends Component
     use WithPagination;
     public $applications,$selectedMethod, $selectedApplication;
 
-    #[On('log-updated')]
+    #[On('log-updated,logUpdated')]
     public function logUpdated($log)
     {
         dd($log);
