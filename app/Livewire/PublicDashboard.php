@@ -44,7 +44,7 @@ class PublicDashboard extends Component
                 "type" => "section",
                 "text" => [
                     "type" => "mrkdwn",
-                    "text" => "Someone reported an issue with your application. Please check the dashboard for more details. Message: $this->issue"
+                    "text" => "Someone reported an issue with $this->selectedApplication['name']. Please check the dashboard for more details. Message: $this->issue"
                 ]
             ]
         ]);
