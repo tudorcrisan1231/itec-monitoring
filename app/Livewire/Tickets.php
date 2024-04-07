@@ -13,6 +13,8 @@ class Tickets extends Component
         $ticket->status = 'closed';
         $ticket->save();
 
+        checkApplicationStatus($ticket->application_id, 100);
+
         return redirect()->route('tickets')->with('success', 'Ticket closed successfully');
     }
 
