@@ -39,33 +39,9 @@ class PublicDashboard extends Component
         $this->selectedApplication->status = 'unstable';
         $this->selectedApplication->save();
 
-        //curl request to: curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
-        $curl = curl_init();
+        SlackAlert::message("Someone reported an issue with your application. Please check the dashboard for more details. Message: $this->issue");
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => env('SLACK_WEBHOOK_URL'),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => '{"text":"Hello, World!"}',
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json',
-                'Authorization: Bearer '.env('SLACK_BEARER_TOKEN')
-            ),
-        ));
-
-        $response = curl_exec($curl);
-        $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-        curl_close($curl);
-
-        //dd response and status
-        dd($response, $status);
-
+        
         Mail::to($this->selectedApplication->user ? $this->selectedApplication->user->email : '')->cc(ccMails())->queue(new AlertDeveloper($this->selectedApplication, "Someone reported an issue with your application. Please check the dashboard for more details. Message: $this->issue"));
 
         return redirect()->route('home')->with('success', 'Issue reported successfully');
