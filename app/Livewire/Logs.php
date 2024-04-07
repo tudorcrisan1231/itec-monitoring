@@ -13,8 +13,9 @@ class Logs extends Component
 {
     use WithPagination;
     public $applications,$selectedMethod, $selectedApplication;
-    protected $listeners = ['LogUpdated' => 'updateLogs'];
+//    protected $listeners = ['LogUpdated' => 'updateLogs'];
 
+    #[On('echo:private-log-updated,LogUpdated')]
     public function updateLogs($log)
     {
         dd($log);
