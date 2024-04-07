@@ -6,7 +6,7 @@ use App\Models\Report;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use App\Mail\AlertDeveloper;
-use Spatie\SlackAlerts\SlackAlert;
+use Spatie\SlackAlerts\Facades\SlackAlert;
 
 class PublicDashboard extends Component
 {
