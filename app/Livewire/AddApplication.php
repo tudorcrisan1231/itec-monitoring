@@ -59,7 +59,7 @@ class AddApplication extends Component
 
         foreach($this->endpoints as $endpoint){
             //verify if the endpoint is already in the database
-            if(Endpoint::where('url', $endpoint['url'])->where('application_id', $app->id)->first()){
+            if(Endpoint::where('url', $endpoint['url'])->where('application_id', $app->id)->where('method', $endpoint->method)->first()){
                 continue;
             }
 
