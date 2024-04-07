@@ -51,7 +51,7 @@ class PublicDashboard extends Component
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => 'text=Hello, World123!',
+            CURLOPT_POSTFIELDS => '{"text":"Hello, World!"}',
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json',
                 'Authorization: Bearer '.env('SLACK_BEARER_TOKEN')
