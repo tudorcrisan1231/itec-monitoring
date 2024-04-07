@@ -28,5 +28,5 @@ Tier 4.
 * ~~Când este raportat un bug, Developerul este notificat. Alegerea modalității de notificare este la alegerea echipei, si in funcție de complexitate se va primi punctaj diferit.~~
 
 Tier 5.
-* Starea endpointurilor se va reîmprospăta in real-time pe Dashboardului.
+* ~~Starea endpointurilor se va reîmprospăta in real-time pe Dashboardului.~~
 * ~~Developerul are posibilitatea, într-o rubrica de Setări, sa editeze intervalele notate cu X in enunț.~~
