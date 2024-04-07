@@ -18,7 +18,10 @@ class Logs extends Component
     #[On('echo:private-log-updated,LogUpdated')]
     public function updateLogs($log)
     {
-        dd($log);
+        //refresh the logs only if the ?page is not set
+        if(!request()->has('page')){
+            $this->render();
+        }
     }
 
     public function filterLogs()
