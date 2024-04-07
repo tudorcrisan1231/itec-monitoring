@@ -98,7 +98,7 @@
     </div>
 
     <script>
-        import Echo from 'laravel-echo'
+        const { Echo } = require('laravel-echo');
 
         window.Echo = new Echo({
             broadcaster: 'pusher',
