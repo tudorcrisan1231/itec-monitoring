@@ -96,4 +96,20 @@
     <div class="mt-6">
         {{$logs->links()}}
     </div>
+
+    <script>
+        import Echo from 'laravel-echo'
+
+        window.Echo = new Echo({
+            broadcaster: 'pusher',
+            key: '{{env('PUSHER_APP_KEY')}}',
+            cluster: 'eu',
+            forceTLS: true
+        });
+
+        var channel = Echo.channel('log-updated');
+        channel.listen('LogUpdated', function(data) {
+            alert(JSON.stringify(data));
+        });
+    </script>
 </div>
