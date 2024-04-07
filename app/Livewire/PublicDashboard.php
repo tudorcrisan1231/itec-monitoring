@@ -43,7 +43,7 @@ class PublicDashboard extends Component
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://hooks.slack.com/services/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',
+            CURLOPT_URL => env('SLACK_WEBHOOK_URL'),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
