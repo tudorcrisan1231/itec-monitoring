@@ -46,8 +46,12 @@ class PublicDashboard extends Component
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['text' => "Someone reported an issue with your application. Please check the dashboard for more details. Message: $this->issue"]));
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
+        $response = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
+
+        //dd response and status
+        dd($response, $status);
 
         Mail::to($this->selectedApplication->user ? $this->selectedApplication->user->email : '')->cc(ccMails())->queue(new AlertDeveloper($this->selectedApplication, "Someone reported an issue with your application. Please check the dashboard for more details. Message: $this->issue"));
 
