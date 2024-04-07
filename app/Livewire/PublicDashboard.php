@@ -40,15 +40,8 @@ class PublicDashboard extends Component
         $this->selectedApplication->save();
 
         Mail::to($this->selectedApplication->user ? $this->selectedApplication->user->email : '')->cc(ccMails())->queue(new AlertDeveloper($this->selectedApplication, "Someone reported an issue with your application. Please check the dashboard for more details. Message: $this->issue"));
-        SlackAlert::blocks([
-            [
-                "type" => "section",
-                "text" => [
-                    "type" => "mrkdwn",
-                    "text" => "Someone reported an issue with your application. Please check the dashboard for more details. Message: $this->issue"
-                ]
-            ]
-        ]);
+
+        SlackAlert::sendMessage("Someone reported an issue with your application. Please check the dashboard for more details. Message: $this->issue");
 
         return redirect()->route('home')->with('success', 'Issue reported successfully');
     }
