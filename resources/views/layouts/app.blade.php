@@ -12,7 +12,7 @@
 <body>
     @include('components.session')
     @yield('content')
-    <script src="{{asset('js/app.js')}}"></script>
+    @vite('resources/js/app.js')
     @livewireScripts
 </body>
 </html>
